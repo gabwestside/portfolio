@@ -11,10 +11,12 @@ export const projects: Project[] = [
     demo: 'https://seu-site.com',
   },
   {
-    slug: 'portfolio-next',
-    title: 'Portfólio Next.js',
-    description: 'Template deste site com shadcn/ui e efeitos de scroll.',
-    image: '/screens/portfolio.png',
+    slug: 'wst-money',
+    title: 'WST Money',
+    description: 'Aplicativo de gerenciamento financeiro com integração ao WhatsApp.',
+    image: 'https://github.com/user-attachments/assets/3cff440d-5a88-4b4e-8354-1f62b6f1417a',
     tech: ['Next.js', 'Tailwind', 'shadcn/ui', 'Framer Motion'],
+    repo: 'https://github.com/gabwestside/wst-money',
+    demo: 'https://wst-money.vercel.app/',
   },
 ]

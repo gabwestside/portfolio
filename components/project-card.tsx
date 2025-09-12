@@ -21,10 +21,10 @@ export function ProjectCard(p: Project) {
       </CardHeader>
       <CardContent>
         <div className='relative aspect-[16/10] overflow-hidden rounded-xl border border-white/10'>
-          <Image
+          <img
             src={p.image}
             alt='screenshot do projeto'
-            fill
+            // fill
             className='object-cover'
           />
         </div>

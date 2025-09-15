@@ -17,14 +17,14 @@ export function ProjectCard(p: Project) {
   return (
     <Card className='bg-white/5 border-white/10 hover:bg-white/[0.06] transition'>
       <CardHeader>
-        <CardTitle className='text-base'>{p.title}</CardTitle>
+        <CardTitle className='text-base text-zinc-200' >{p.title}</CardTitle>
       </CardHeader>
       <CardContent>
         <div className='relative aspect-[16/10] overflow-hidden rounded-xl border border-white/10'>
-          <img
+          <Image
             src={p.image}
             alt='screenshot do projeto'
-            // fill
+            fill
             className='object-cover'
           />
         </div>
@@ -34,7 +34,7 @@ export function ProjectCard(p: Project) {
             <Badge
               key={t}
               variant='secondary'
-              className='bg-white/10 border-white/10'
+              className='bg-white/10 border-white/10 text-zinc-400'
             >
               {t}
             </Badge>

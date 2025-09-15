@@ -17,7 +17,6 @@ export function Hero() {
         style={{ y: y2 }}
         aria-hidden
         className='pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[90vw] max-w-5xl h-72 rounded-full blur-3xl'
-        // style={{ y: y2 }}
       >
         <div className='w-full h-full bg-gradient-to-b from-brand-500/50 to-fuchsia-500/30 rounded-full' />
       </motion.div>
@@ -35,16 +34,16 @@ export function Hero() {
             interfaces orgânicas, animações sutis e código limpo.
           </p>
           <div className='flex flex-wrap gap-3'>
-            <Button asChild className='bg-brand-500 hover:bg-brand-600'>
-              <a href='#projetos'>Ver projetos</a>
+            <Button asChild className='bg-brand-500 hover:bg-brand-600 '>
+              <a href='#projects'>Ver projetos</a>
             </Button>
             <Button
               asChild
               variant='secondary'
-              className='bg-white/10 border-white/10'
+              className='bg-white/10 border-white/10 text-zinc-200 hover:text-zinc-800'
             >
               <a
-                href='https://github.com/seu-usuario'
+                href='https://github.com/gabwestside'
                 target='_blank'
                 rel='noreferrer'
               >
@@ -55,10 +54,10 @@ export function Hero() {
             <Button
               asChild
               variant='secondary'
-              className='bg-white/10 border-white/10'
+              className='bg-white/10 border-white/10 text-zinc-200 hover:text-zinc-800'
             >
               <a
-                href='https://www.linkedin.com/in/seu-usuario'
+                href='https://www.linkedin.com/in/gabriel-moura-706541200/'
                 target='_blank'
                 rel='noreferrer'
               >

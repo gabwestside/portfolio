@@ -6,7 +6,7 @@ export function Footer() {
           © {new Date().getFullYear()} Gabwestside. Todos os direitos
           reservados.
         </p>
-        <p>Feito com Next.js, Tailwind e shadcn/ui.</p>
+        <p>Feito com 💟 por Gabriel R. Moura.</p>
       </div>
     </footer>
   )

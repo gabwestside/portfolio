@@ -71,7 +71,7 @@ export function Hero() {
         <motion.div style={{ y: y2, scale }} className='justify-self-center'>
           <div className='relative h-64 w-64 md:h-72 md:w-72'>
             <Image
-              src='/profile-pic.jpg'
+              src='/profile-pic.png'
               alt='Foto de perfil'
               fill
               className='rounded-full object-cover ring-4 ring-white/80 shadow-soft'

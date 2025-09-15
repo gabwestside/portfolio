@@ -6,6 +6,12 @@ Um portfólio moderno, orgânico e responsivo com efeitos de scroll, cards de pr
 
 ---
 
+## 📸 Preview
+
+<img width="1893" height="940" alt="image" src="https://github.com/user-attachments/assets/20a941b7-b317-41b1-986f-778d6f347851" />
+
+---
+
 ## ✨ Recursos
 
 * **Hero** com parallax/scroll sutil e fundo orgânico (gradientes/blobs)

@@ -11,7 +11,7 @@ export function ProjectsSection() {
         <p className='text-white/70 mt-2'>
           Alguns trabalhos recentes e estudos pessoais.
         </p>
-        <div className='mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
+        <div className='mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 cursor-pointer'>
           {projects.map((p) => (
             <ProjectCard key={p.slug} {...p} />
           ))}

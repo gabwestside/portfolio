@@ -1,19 +1,6 @@
-import { AboutSection } from '@/components/about-section'
-import { ContactSection } from '@/components/contact-section'
-import { Footer } from '@/components/footer'
-import { Hero } from '@/components/hero'
-import { Navbar } from '@/components/navbar'
-import { ProjectsSection } from '@/components/sections-project'
+import { routing } from '@/i18n/routing'
+import { redirect } from 'next/navigation'
 
-export default function HomePage() {
-  return (
-    <main>
-      <Navbar />
-      <Hero />
-      <ProjectsSection />
-      <AboutSection />
-      <ContactSection />
-      <Footer />
-    </main>
-  )
+export default function RootPage() {
+  redirect(`/${routing.defaultLocale}`)
 }

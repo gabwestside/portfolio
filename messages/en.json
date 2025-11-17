@@ -1,0 +1,54 @@
+{
+  "Metadata": {
+    "title": "Gabwestside • Portfolio",
+    "description": "Projects, experiences and contact information for Gabriel (Gabwestside)."
+  },
+  "Navbar": {
+    "brand": "Gabwestside",
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "Hero": {
+    "name": "Gabriel Rodrigues",
+    "role": "Software Developer",
+    "description": "I create modern, accessible, and performant web experiences. I enjoy organic interfaces, subtle animations, and clean code.",
+    "viewProjects": "View projects",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "profileAlt": "Profile picture"
+  },
+  "Projects": {
+    "title": "Featured Projects",
+    "subtitle": "Some recent work and personal studies.",
+    "screenshotAlt": "project screenshot",
+    "code": "Code",
+    "demo": "Demo"
+  },
+  "About": {
+    "title": "About",
+    "description": "I'm a fullstack developer focused on front-end with React/Next.js and experience with Node.js. I enjoy building fluid and accessible interfaces, with attention to detail and performance. In my free time, I study animations, UX, and design patterns."
+  },
+  "Contact": {
+    "title": "Contact",
+    "subtitle": "Open to new opportunities and partnerships.",
+    "email": "Email",
+    "whatsapp": "WhatsApp"
+  },
+  "Footer": {
+    "copyright": "© {year} Gabwestside. All rights reserved.",
+    "madeWith": "Built with Next.js, Tailwind and shadcn/ui."
+  },
+  "ProjectList": [
+    {
+      "slug": "link-card",
+      "title": "Business Card (Linktree)",
+      "description": "Link page with PIX modal and WhatsApp integration."
+    },
+    {
+      "slug": "wst-money",
+      "title": "WST Money",
+      "description": "Financial management app with WhatsApp integration."
+    }
+  ]
+}

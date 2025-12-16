@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { ExternalLink, Github, X } from 'lucide-react'
+import { ExternalLink, Github } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
 
@@ -24,6 +24,9 @@ export type Project = {
   repo?: string
   demo?: string
   longDescription?: string
+  details?: string
+  codeLabel?: string
+  demoLabel?: string
 }
 
 export function ProjectCard(p: Project) {
@@ -42,7 +45,7 @@ export function ProjectCard(p: Project) {
               <CardTitle className='text-base text-zinc-200 flex items-center justify-between'>
                 <span>{p.title}</span>
                 <span className='text-[11px] font-medium text-white/50 opacity-0 group-hover:opacity-100 transition'>
-                  Clique para ver detalhes
+                  {p.details}
                 </span>
               </CardTitle>
             </CardHeader>
@@ -121,7 +124,7 @@ export function ProjectCard(p: Project) {
               <Button asChild className='bg-brand-500 hover:bg-brand-600'>
                 <a href={p.demo} target='_blank' rel='noreferrer'>
                   <ExternalLink className='mr-2 h-4 w-4' />
-                  Abrir site
+                  {p.demoLabel}
                 </a>
               </Button>
             )}
@@ -133,7 +136,7 @@ export function ProjectCard(p: Project) {
               >
                 <a href={p.repo} target='_blank' rel='noreferrer'>
                   <Github className='mr-2 h-4 w-4' />
-                  Ver código
+                  {p.codeLabel}
                 </a>
               </Button>
             )}

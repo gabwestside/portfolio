@@ -1,67 +1,53 @@
 import type { Project } from '@/components/project-card'
 
-export const projects: Project[] = [
-  {
-    slug: 'wst-money',
-    title: 'WST Money',
-    description: 'Aplicativo de gerenciamento financeiro.',
-    image: '/wst-money.png',
-    tech: ['Next.js', 'Tailwind', 'Shadcn/ui', 'Supabase', 'Intl'],
-    repo: 'https://github.com/gabwestside/wst-money',
-    demo: 'https://wst-money.vercel.app/',
-  },
-  {
-    slug: 'habit-tracker',
-    title: 'Habit Tracker',
-    description: 'Aplicativo para monitorar hábitos diários.',
-    image: '/habits.png',
-    tech: ['React Native', 'Tailwind', 'Node JS', 'Prisma', 'Postgrees'],
-    repo: 'https://github.com/gabwestside/wst-setup',
-    demo: 'https://wstside-habits.vercel.app/',
-  },
-  {
-    slug: 'gym-tracker',
-    title: 'Gym Tracker',
-    description: 'Aplicativo para acompanhar treinos de academia.',
-    image: '/gym-tracker.png',
-    tech: ['Next.js', 'Tailwind', 'Shadcn/ui', 'Supabase', 'Intl'],
-    repo: 'https://github.com/gabwestside/gym-tracker',
-    demo: 'https://wstside-gym.vercel.app/',
-  },
-  {
-    slug: 'link-card',
-    title: 'Cartão de Visita (Linktree)',
-    description: 'Página de links com modal de PIX e integração WhatsApp.',
-    image: '/linktree.png',
-    tech: ['React', 'Tailwind', 'Lucide'],
-    repo: 'https://github.com/gabwestside/wst-linktree',
-    demo: 'https://wst-linktree.vercel.app/',
-  },
-  // {
-  //   slug: 'lucky-numbers',
-  //   title: 'Números da Sorte',
-  //   description: 'Gere números da sorte para loterias brasileiras.',
-  //   image: '/lucky-numbers.png',
-  //   tech: ['.NET', 'Blazor', 'C#', 'Tailwind', 'Docker'],
-  //   repo: 'https://github.com/gabwestside/lucky-numbers',
-  //   demo: 'https://gabwestside.github.io/lucky-numbers/',
-  // },
-  {
-    slug: 'lucky-numbers',
-    title: 'Gerador da Sorte',
-    description: 'Gere números da sorte para loterias brasileiras.',
-    image: '/lucky-generator.png',
-    tech: ['React', 'Vite', 'C#', 'Tailwind'],
-    repo: 'https://github.com/gabwestside/lucky-generator',
-    demo: 'https://lucky-generator-two.vercel.app/',
-  },
-  {
-    slug: 'love-days',
-    title: 'Contador de Dias de Amor',
-    description: 'Conte os dias desde o início do relacionamento.',
-    image: '/love-days.png',
-    tech: ['React', 'Vite', 'Tailwind'],
-    repo: 'https://github.com/gabwestside/wst-love-counter',
-    demo: 'https://happylovedays.vercel.app/',
-  },
-]
+type ProjectTranslation = {
+  slug: string
+  title: string
+  description: string
+}
+
+export function getProjects(projectList: ProjectTranslation[]): Project[] {
+  const projectsData: Record<string, Omit<Project, 'title' | 'description' | 'slug'>> = {
+    'wst-money': {
+      image: '/wst-money.png',
+      tech: ['Next.js', 'Tailwind', 'Shadcn/ui', 'Supabase', 'Intl'],
+      repo: 'https://github.com/gabwestside/wst-money',
+      demo: 'https://wst-money.vercel.app/',
+    },
+    'habit-tracker': {
+      image: '/habits.png',
+      tech: ['React Native', 'Tailwind', 'Node JS', 'Prisma', 'Postgrees'],
+      repo: 'https://github.com/gabwestside/wst-setup',
+      demo: 'https://wstside-habits.vercel.app/',
+    },
+    'gym-tracker': {
+      image: '/gym-tracker.png',
+      tech: ['Next.js', 'Tailwind', 'Shadcn/ui', 'Supabase', 'Intl'],
+      repo: 'https://github.com/gabwestside/gym-tracker',
+      demo: 'https://wstside-gym.vercel.app/',
+    },
+    'link-card': {
+      image: '/linktree.png',
+      tech: ['React', 'Tailwind', 'Lucide'],
+      repo: 'https://github.com/gabwestside/wst-linktree',
+      demo: 'https://wst-linktree.vercel.app/',
+    },
+    'lucky-numbers': {
+      image: '/lucky-generator.png',
+      tech: ['React', 'Vite', 'C#', 'Tailwind'],
+      repo: 'https://github.com/gabwestside/lucky-generator',
+      demo: 'https://lucky-generator-two.vercel.app/',
+    },
+    'love-days': {
+      image: '/love-days.png',
+      tech: ['React', 'Vite', 'Tailwind'],
+      repo: 'https://github.com/gabwestside/wst-love-counter',
+      demo: 'https://happylovedays.vercel.app/',
+    },
+  }
+
+  return projectList.map((p) => ({
+    ...p,
+    ...projectsData[p.slug],
+  }))
+}

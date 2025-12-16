@@ -5,7 +5,7 @@ import { Hero } from '@/components/hero'
 import { Navbar } from '@/components/navbar'
 import { ProjectsSection } from '@/components/sections-project'
 
-export default function HomePage() {
+export default function Page() {
   return (
     <main>
       <Navbar />

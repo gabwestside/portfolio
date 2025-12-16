@@ -3,23 +3,25 @@
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Menu } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useState } from 'react'
 
-const links = [
-  { href: '#projetos', label: 'Projetos' },
-  { href: '#sobre', label: 'Sobre' },
-  { href: '#contato', label: 'Contato' },
-]
-
 export function Navbar() {
+  const t = useTranslations('UserProfile')
   const [open, setOpen] = useState(false)
+
+  const links = [
+    { href: '#projetos', label: t('projects') },
+    { href: '#sobre', label: t('about') },
+    { href: '#contato', label: t('contact') },
+  ]
 
   return (
     <header className='sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-black/30 bg-black/20 border-b border-white/10'>
       <nav className='mx-auto max-w-6xl px-4 h-14 flex items-center justify-between'>
         <Link href='#' className='font-semibold tracking-tight'>
-          Gabwestside
+          {t('brand')}
         </Link>
         <div className='hidden md:flex gap-6 text-sm'>
           {links.map((l) => (

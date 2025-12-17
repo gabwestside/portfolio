@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { LightningLoader } from '@/components/loading'
 import { ScrollProgress } from '@/components/scroll-progress'
 import { getProjects } from '@/lib/projects'
@@ -15,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: t('title'),
     description: t('description'),
-    icons: [{ rel: 'icon', url: '/favicon_gabwest.ico' }],
+    icons: [{ rel: 'icon', url: '/favicon.ico' }],
   }
 }
 

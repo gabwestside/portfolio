@@ -24,7 +24,39 @@
     "screenshotAlt": "project screenshot",
     "details": "Click to view details",
     "code": "View code",
-    "demo": "Open website"
+    "demo": "Open website",
+    "ProjectList": [
+      {
+        "slug": "wst-money",
+        "title": "WST Money",
+        "description": "Financial management application."
+      },
+      {
+        "slug": "habit-tracker",
+        "title": "Habit Tracker",
+        "description": "Application to track daily habits."
+      },
+      {
+        "slug": "gym-tracker",
+        "title": "Gym Tracker",
+        "description": "Application to track gym workouts."
+      },
+      {
+        "slug": "link-card",
+        "title": "Business Card (Linktree)",
+        "description": "Link page with PIX modal and WhatsApp integration."
+      },
+      {
+        "slug": "lucky-numbers",
+        "title": "Lucky Generator",
+        "description": "Generate lucky numbers for Brazilian lotteries."
+      },
+      {
+        "slug": "love-days",
+        "title": "Love Days Counter",
+        "description": "Count the days since the beginning of the relationship."
+      }
+    ]
   },
   "About": {
     "title": "About",
@@ -39,37 +71,5 @@
   "Footer": {
     "copyright": "© {year} Gabwestside. All rights reserved.",
     "madeWith": "Built with Next.js, Tailwind and shadcn/ui."
-  },
-  "ProjectList": [
-    {
-      "slug": "wst-money",
-      "title": "WST Money",
-      "description": "Financial management application."
-    },
-    {
-      "slug": "habit-tracker",
-      "title": "Habit Tracker",
-      "description": "Application to track daily habits."
-    },
-    {
-      "slug": "gym-tracker",
-      "title": "Gym Tracker",
-      "description": "Application to track gym workouts."
-    },
-    {
-      "slug": "link-card",
-      "title": "Business Card (Linktree)",
-      "description": "Link page with PIX modal and WhatsApp integration."
-    },
-    {
-      "slug": "lucky-numbers",
-      "title": "Lucky Generator",
-      "description": "Generate lucky numbers for Brazilian lotteries."
-    },
-    {
-      "slug": "love-days",
-      "title": "Love Days Counter",
-      "description": "Count the days since the beginning of the relationship."
-    }
-  ]
+  }
 }

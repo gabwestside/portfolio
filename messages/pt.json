@@ -24,7 +24,39 @@
     "screenshotAlt": "screenshot do projeto",
     "details": "Clique para ver detalhes",
     "code": "Ver código",
-    "demo": "Abrir site"
+    "demo": "Abrir site",
+    "ProjectList": [
+      {
+        "slug": "wst-money",
+        "title": "WST Money",
+        "description": "Aplicativo de gerenciamento financeiro."
+      },
+      {
+        "slug": "habit-tracker",
+        "title": "Habit Tracker",
+        "description": "Aplicativo para monitorar hábitos diários."
+      },
+      {
+        "slug": "gym-tracker",
+        "title": "Gym Tracker",
+        "description": "Aplicativo para acompanhar treinos de academia."
+      },
+      {
+        "slug": "link-card",
+        "title": "Cartão de Visita (Linktree)",
+        "description": "Página de links com modal de PIX e integração WhatsApp."
+      },
+      {
+        "slug": "lucky-numbers",
+        "title": "Gerador da Sorte",
+        "description": "Gere números da sorte para loterias brasileiras."
+      },
+      {
+        "slug": "love-days",
+        "title": "Contador de Dias de Amor",
+        "description": "Conte os dias desde o início do relacionamento."
+      }
+    ]
   },
   "About": {
     "title": "Sobre",
@@ -39,37 +71,5 @@
   "Footer": {
     "copyright": "© {year} Gabwestside. Todos os direitos reservados.",
     "madeWith": "Feito com Next.js, Tailwind e shadcn/ui."
-  },
-  "ProjectList": [
-    {
-      "slug": "wst-money",
-      "title": "WST Money",
-      "description": "Aplicativo de gerenciamento financeiro."
-    },
-    {
-      "slug": "habit-tracker",
-      "title": "Habit Tracker",
-      "description": "Aplicativo para monitorar hábitos diários."
-    },
-    {
-      "slug": "gym-tracker",
-      "title": "Gym Tracker",
-      "description": "Aplicativo para acompanhar treinos de academia."
-    },
-    {
-      "slug": "link-card",
-      "title": "Cartão de Visita (Linktree)",
-      "description": "Página de links com modal de PIX e integração WhatsApp."
-    },
-    {
-      "slug": "lucky-numbers",
-      "title": "Gerador da Sorte",
-      "description": "Gere números da sorte para loterias brasileiras."
-    },
-    {
-      "slug": "love-days",
-      "title": "Contador de Dias de Amor",
-      "description": "Conte os dias desde o início do relacionamento."
-    }
-  ]
+  }
 }

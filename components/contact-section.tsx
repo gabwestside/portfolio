@@ -1,19 +1,19 @@
 import { Button } from '@/components/ui/button'
 import { Mail, MessageCircle } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 export function ContactSection() {
+  const t = useTranslations('Contact')
   return (
     <section id='contact' className='scroll-mt-24 py-10 md:py-16'>
       <div className='mx-auto max-w-4xl px-4 text-center'>
-        <h2 className='text-2xl md:text-3xl font-semibold'>Contato</h2>
-        <p className='text-white/80 mt-3'>
-          Aberto a novas oportunidades e parcerias.
-        </p>
+        <h2 className='text-2xl md:text-3xl font-semibold'>{t('title')}</h2>
+        <p className='text-white/80 mt-3'>{t('subtitle')}</p>
         <div className='mt-6 flex justify-center gap-3'>
           <Button asChild className='bg-brand-500 hover:bg-brand-600'>
             <a href='mailto:gabrielnfl13@gmail.com'>
               <Mail className='mr-2 h-4 w-4' />
-              E‑mail
+              {t('email')}
             </a>
           </Button>
           <Button
@@ -27,7 +27,7 @@ export function ContactSection() {
               rel='noreferrer'
             >
               <MessageCircle className='mr-2 h-4 w-4' />
-              WhatsApp
+              {t('whatsapp')}
             </a>
           </Button>
         </div>

@@ -1,11 +1,13 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
-import Image from 'next/image'
 import { Button } from '@/components/ui/button'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { Github, Linkedin } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import Image from 'next/image'
 
 export function Hero() {
+  const t = useTranslations('Hero')
   const { scrollY } = useScroll()
   const y1 = useTransform(scrollY, [0, 400], [0, 80])
   const y2 = useTransform(scrollY, [0, 400], [0, -60])
@@ -24,18 +26,17 @@ export function Hero() {
       <div className='mx-auto max-w-6xl px-4 grid lg:grid-cols-[1.1fr,0.9fr] gap-8 items-center'>
         <motion.div style={{ y: y1, scale }} className='space-y-6'>
           <h1 className='text-4xl md:text-5xl font-bold leading-tight'>
-            Gabriel Rodrigues
+            {t('name')}
             <span className='block text-lg md:text-xl font-normal text-white/70'>
-              Desenvolvedor de Software
+              {t('role')}
             </span>
           </h1>
-          <p className='text-white/80 max-w-2xl'>
-            Crio experiências web modernas, acessíveis e performáticas. Curto
-            interfaces orgânicas, animações sutis e código limpo.
-          </p>
+          <p className='text-white/80 max-w-2xl'>{t('description')}</p>
           <div className='flex flex-wrap gap-3'>
             <Button asChild className='bg-brand-500 hover:bg-brand-600 '>
-              <a href='#projects'>Ver projetos</a>
+              <a href='#projects'>
+                {t('viewProjects')}
+              </a>
             </Button>
             <Button
               asChild
@@ -48,7 +49,7 @@ export function Hero() {
                 rel='noreferrer'
               >
                 <Github className='mr-2 h-4 w-4' />
-                GitHub
+                {t('github')}
               </a>
             </Button>
             <Button
@@ -62,7 +63,7 @@ export function Hero() {
                 rel='noreferrer'
               >
                 <Linkedin className='mr-2 h-4 w-4' />
-                LinkedIn
+                {t('linkedin')}
               </a>
             </Button>
           </div>
@@ -72,7 +73,7 @@ export function Hero() {
           <div className='relative h-64 w-64 md:h-72 md:w-72'>
             <Image
               src='/profile-pic.png'
-              alt='Foto de perfil'
+              alt={t('profileAlt')}
               fill
               className='rounded-full object-cover ring-4 ring-white/80 shadow-soft'
             />

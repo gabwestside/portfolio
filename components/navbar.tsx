@@ -10,23 +10,26 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { Github, Linkedin, Menu } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useState } from 'react'
-
-const links = [
-  { href: '#projects', label: 'Projetos' },
-  { href: '#about', label: 'Sobre' },
-  { href: '#contact', label: 'Contato' },
-]
+import { LanguageSwitcher } from './language-switcher'
 
 export function Navbar() {
+  const t = useTranslations('Navbar')
   const [open, setOpen] = useState(false)
+
+  const links = [
+    { href: '#projects', label: t('projects') },
+    { href: '#about', label: t('about') },
+    { href: '#contact', label: t('contact') },
+  ]
 
   return (
     <header className='sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-black/30 bg-black/20 border-b border-white/10'>
       <nav className='mx-auto max-w-6xl px-4 h-14 flex items-center justify-between'>
         <Link href='#' className='font-semibold tracking-tight'>
-          Gabwestside
+          {t('brand')}
         </Link>
 
         <div className='hidden md:flex gap-6 text-sm'>
@@ -104,6 +107,7 @@ export function Navbar() {
             </SheetContent>
           </Sheet>
         </div>
+        <LanguageSwitcher />
       </nav>
     </header>
   )

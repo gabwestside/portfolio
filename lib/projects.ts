@@ -38,11 +38,17 @@ export function getProjects(projectList: ProjectTranslation[]): Project[] {
       repo: 'https://github.com/gabwestside/lucky-generator',
       demo: 'https://lucky-generator-two.vercel.app/',
     },
-    'love-days': {
-      image: '/love-days.png',
-      tech: ['React', 'Vite', 'Tailwind'],
-      repo: 'https://github.com/gabwestside/wst-love-counter',
-      demo: 'https://happylovedays.vercel.app/',
+    // 'love-days': {
+    //   image: '/love-days.png',
+    //   tech: ['React', 'Vite', 'Tailwind'],
+    //   repo: 'https://github.com/gabwestside/wst-love-counter',
+    //   demo: 'https://happylovedays.vercel.app/',
+    // },
+    'contra-hpv': {
+      image: '/contra-hpv.png',
+      tech: ['React', 'Vite', 'Tailwind', 'Node'],
+      repo: 'https://github.com/gabwestside/contra-hpv',
+      demo: 'https://contra-hpv.vercel.app',
     },
   }
 

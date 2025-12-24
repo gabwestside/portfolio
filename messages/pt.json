@@ -52,9 +52,9 @@
         "description": "Gere números da sorte para loterias brasileiras."
       },
       {
-        "slug": "love-days",
-        "title": "Contador de Dias de Amor",
-        "description": "Conte os dias desde o início do relacionamento."
+        "slug": "contra-hpv",
+        "title": "Todos Contra o HPV",
+        "description": "Dashboard de acompanhamento na luta Contra o HPV."
       }
     ]
   },

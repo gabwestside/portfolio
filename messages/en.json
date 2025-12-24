@@ -52,9 +52,9 @@
         "description": "Generate lucky numbers for Brazilian lotteries."
       },
       {
-        "slug": "love-days",
-        "title": "Love Days Counter",
-        "description": "Count the days since the beginning of the relationship."
+        "slug": "contra-hpv",
+        "title": "Everyone Against HPV",
+        "description": "Dashboard for monitoring the fight against HPV."
       }
     ]
   },

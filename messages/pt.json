@@ -71,5 +71,9 @@
   "Footer": {
     "copyright": "© {year} Gabwestside. Todos os direitos reservados.",
     "madeWith": "Feito com Next.js, Tailwind e shadcn/ui."
+  },
+  "LangToggle": {
+    "en": "Inglês",
+    "pt": "Português"
   }
 }

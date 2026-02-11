@@ -7,7 +7,10 @@ type ProjectTranslation = {
 }
 
 export function getProjects(projectList: ProjectTranslation[]): Project[] {
-  const projectsData: Record<string, Omit<Project, 'title' | 'description' | 'slug'>> = {
+  const projectsData: Record<
+    string,
+    Omit<Project, 'title' | 'description' | 'slug'>
+  > = {
     'wst-money': {
       image: '/wst-money.png',
       tech: ['Next.js', 'Tailwind', 'Shadcn/ui', 'Supabase', 'Intl'],
@@ -57,3 +60,22 @@ export function getProjects(projectList: ProjectTranslation[]): Project[] {
     ...projectsData[p.slug],
   }))
 }
+
+export const contacts = [
+  {
+    name: 'GitHub',
+    href: 'https://github.com/gabwestside',
+  },
+  {
+    name: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/gabwestside/',
+  },
+  {
+    name: 'Email',
+    href: 'mailto:gabrielnfl13@gmail.com',
+  },
+  {
+    name: 'WhatsApp',
+    href: 'https://wa.me/5585992729746?text=Ol%C3%A1!%20Vim%20pelo%20seu%20portf%C3%B3lio.',
+  },
+]

@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import { contacts } from '@/lib/projects'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Github, Linkedin } from 'lucide-react'
 import { useTranslations } from 'next-intl'
@@ -8,10 +9,14 @@ import Image from 'next/image'
 
 export function Hero() {
   const t = useTranslations('Hero')
+
   const { scrollY } = useScroll()
   const y1 = useTransform(scrollY, [0, 400], [0, 80])
   const y2 = useTransform(scrollY, [0, 400], [0, -60])
   const scale = useTransform(scrollY, [0, 400], [1, 0.94])
+
+  const github = contacts.find((l) => l.name === 'GitHub')?.href || '#'
+  const linkedin = contacts.find((l) => l.name === 'LinkedIn')?.href || '#'
 
   return (
     <section className='relative overflow-hidden pt-20 pb-24'>
@@ -34,20 +39,14 @@ export function Hero() {
           <p className='text-white/80 max-w-2xl'>{t('description')}</p>
           <div className='flex flex-wrap gap-3'>
             <Button asChild className='bg-brand-500 hover:bg-brand-600 '>
-              <a href='#projects'>
-                {t('viewProjects')}
-              </a>
+              <a href='#projects'>{t('viewProjects')}</a>
             </Button>
             <Button
               asChild
               variant='secondary'
               className='bg-white/10 border-white/10 text-zinc-200 hover:text-zinc-800'
             >
-              <a
-                href='https://github.com/gabwestside'
-                target='_blank'
-                rel='noreferrer'
-              >
+              <a href={github} target='_blank' rel='noreferrer'>
                 <Github className='mr-2 h-4 w-4' />
                 {t('github')}
               </a>
@@ -57,11 +56,7 @@ export function Hero() {
               variant='secondary'
               className='bg-white/10 border-white/10 text-zinc-200 hover:text-zinc-800'
             >
-              <a
-                href='https://www.linkedin.com/in/gabriel-moura-706541200/'
-                target='_blank'
-                rel='noreferrer'
-              >
+              <a href={linkedin} target='_blank' rel='noreferrer'>
                 <Linkedin className='mr-2 h-4 w-4' />
                 {t('linkedin')}
               </a>

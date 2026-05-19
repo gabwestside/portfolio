@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { LightningLoader } from '@/components/loading'
+import { TimedSkeletonOverlay } from '@/components/loading'
 import { ScrollProgress } from '@/components/scroll-progress'
 import { getProjects } from '@/lib/projects'
 import type { Metadata } from 'next'
@@ -38,7 +37,13 @@ export default function RootLayout({
     <html suppressHydrationWarning>
       <body className={inter.className}>
         <NextIntlClientProvider>
-          <LightningLoader images={imagesToPreload} minDuration={1200} />
+          {/* <LightningLoader images={imagesToPreload} minDuration={1200} /> */}
+          {/* <CurtainLoader minDuration={900} /> */}
+          <TimedSkeletonOverlay
+            images={imagesToPreload}
+            minDuration={900}
+            maxDuration={2500}
+          />
           <ScrollProgress />
           {children}
         </NextIntlClientProvider>

@@ -1,135 +1,132 @@
 'use client'
-import { useEffect, useState } from 'react'
-import { motion, useAnimation } from 'framer-motion'
 
-export type LightningLoaderProps = {
+import { Skeleton } from '@/components/ui/skeleton'
+import { motion } from 'framer-motion'
+import { useEffect, useMemo, useState } from 'react'
+
+type Props = {
   images?: string[]
-  minDuration?: number
-  onDone?: () => void
+  minDuration?: number // exibe no mínimo X ms
+  maxDuration?: number // força sumir mesmo se algo falhar
 }
 
-export function LightningLoader({
+export function TimedSkeletonOverlay({
   images = [],
-  minDuration = 1200,
-  onDone,
-}: LightningLoaderProps) {
-  const [mounted, setMounted] = useState(true)
-  const [hit, setHit] = useState(false)
-  const fade = useAnimation()
+  minDuration = 900,
+  maxDuration = 2500,
+}: Props) {
+  const [visible, setVisible] = useState(true)
+
+  const preloadPromise = useMemo(() => {
+    if (typeof window === 'undefined') return Promise.resolve()
+
+    return Promise.all(
+      images.map(
+        (src) =>
+          new Promise<void>((resolve) => {
+            const img = new Image()
+            img.onload = () => resolve()
+            img.onerror = () => resolve()
+            img.src = src
+          }),
+      ),
+    ).then(() => undefined)
+  }, [images])
 
   useEffect(() => {
-    const preload = images.map(
-      (src) =>
-        new Promise<void>((resolve) => {
-          if (typeof window === 'undefined') return resolve()
-          const img = new Image()
-          img.onload = () => resolve()
-          img.onerror = () => resolve()
-          img.src = src
-        })
-    )
+    let killed = false
 
-    const minTime = new Promise<void>((r) => setTimeout(() => r(), minDuration))
-    const t = setTimeout(() => setHit(true), 600)
+    const minTime = new Promise<void>((r) => setTimeout(r, minDuration))
+    const maxTime = new Promise<void>((r) => setTimeout(r, maxDuration))
 
-    Promise.all([Promise.all(preload), minTime]).then(async () => {
-      await fade.start({ opacity: 0, transition: { duration: 0.5 } })
-      setMounted(false)
-      onDone?.()
+    // some quando: (imagens + tempo mínimo) OU estourar maxDuration
+    Promise.race([
+      Promise.all([preloadPromise, minTime]).then(() => undefined),
+      maxTime,
+    ]).then(() => {
+      if (!killed) setVisible(false)
     })
 
-    return () => clearTimeout(t)
-  }, [images, minDuration, fade, onDone])
+    return () => {
+      killed = true
+    }
+  }, [preloadPromise, minDuration, maxDuration])
 
-  if (!mounted) return null
+  if (!visible) return null
 
   return (
     <motion.div
       initial={{ opacity: 1 }}
-      animate={fade}
-      role='status'
-      aria-label='Carregando'
-      className='fixed inset-0 z-[9999] grid place-items-center bg-neutral-950'
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className='fixed inset-0 z-[9999] bg-neutral-950'
       style={{
         backgroundImage:
-          'radial-gradient(800px 400px at 50% 10%, rgba(156,39,255,0.25) 0%, transparent 60%),radial-gradient(700px 380px at 50% 90%, rgba(116,23,234,0.25) 0%, transparent 60%)',
-        backdropFilter: 'blur(0.5px)',
+          'radial-gradient(900px 450px at 50% 15%, rgba(156,39,255,0.26) 0%, transparent 60%),' +
+          'radial-gradient(900px 520px at 50% 95%, rgba(116,23,234,0.24) 0%, transparent 60%)',
       }}
     >
-      <div className='relative w-[min(90vw,680px)] h-[min(60vh,420px)] grid place-items-center'>
-        <motion.h1
-          className='text-4xl md:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text'
-          style={{
-            backgroundImage: 'linear-gradient(180deg,#ffffff,#c9baff)',
-            textShadow: '0 0 24px rgba(255,255,255,.6)',
-          }}
-          animate={hit ? { scale: [1, 1.06, 0.98, 1], y: [0, 3, -2, 0] } : {}}
-          transition={{
-            times: [0, 0.5, 0.85, 1],
-            duration: 0.35,
-            ease: 'easeOut',
-          }}
-        >
-          GABWESTSIDE
-        </motion.h1>
-        
-        <Bolt hit={hit} />
+      <div className='h-full w-full'>
+        {/* Skeleton “igual a página” */}
+        <div className='sticky top-0 z-40 border-b border-white/10 bg-black/20 backdrop-blur'>
+          <div className='mx-auto max-w-6xl px-4 h-14 flex items-center justify-between'>
+            <Skeleton className='h-5 w-28 bg-white/10' />
+            <div className='hidden md:flex gap-4'>
+              <Skeleton className='h-4 w-16 bg-white/10' />
+              <Skeleton className='h-4 w-14 bg-white/10' />
+              <Skeleton className='h-4 w-16 bg-white/10' />
+            </div>
+            <Skeleton className='h-8 w-20 rounded-md bg-white/10' />
+          </div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={hit ? { opacity: [0, 0.9, 0] } : { opacity: 0 }}
-          transition={{ duration: 0.35, ease: 'easeOut' }}
-          className='pointer-events-none absolute inset-0 bg-white/70'
-          style={{ mixBlendMode: 'screen' }}
-        />
+        <section className='pt-20 pb-24'>
+          <div className='mx-auto max-w-6xl px-4 grid lg:grid-cols-[1.1fr,0.9fr] gap-10 items-center'>
+            <div className='space-y-5'>
+              <Skeleton className='h-10 w-[320px] bg-white/10' />
+              <Skeleton className='h-5 w-[220px] bg-white/10' />
+              <div className='space-y-2'>
+                <Skeleton className='h-4 w-[520px] bg-white/10' />
+                <Skeleton className='h-4 w-[480px] bg-white/10' />
+                <Skeleton className='h-4 w-[420px] bg-white/10' />
+              </div>
+              <div className='flex gap-3 pt-2'>
+                <Skeleton className='h-10 w-32 rounded-md bg-white/10' />
+                <Skeleton className='h-10 w-28 rounded-md bg-white/10' />
+                <Skeleton className='h-10 w-28 rounded-md bg-white/10' />
+              </div>
+            </div>
+            <div className='justify-self-center'>
+              <Skeleton className='h-64 w-64 md:h-72 md:w-72 rounded-full bg-white/10' />
+            </div>
+          </div>
+        </section>
+
+        <section className='py-10 md:py-16'>
+          <div className='mx-auto max-w-6xl px-4'>
+            <Skeleton className='h-7 w-60 bg-white/10' />
+            <Skeleton className='mt-3 h-4 w-96 bg-white/10' />
+            <div className='mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
+              {Array.from({ length: 3 }).map((_, i) => (
+                <div
+                  key={i}
+                  className='rounded-xl border border-white/10 bg-white/5 p-4'
+                >
+                  <Skeleton className='h-5 w-44 bg-white/10' />
+                  <Skeleton className='mt-4 aspect-[16/10] w-full rounded-xl bg-white/10' />
+                  <Skeleton className='mt-4 h-4 w-[90%] bg-white/10' />
+                  <Skeleton className='mt-2 h-4 w-[75%] bg-white/10' />
+                  <div className='mt-4 flex flex-wrap gap-2'>
+                    <Skeleton className='h-5 w-14 rounded-full bg-white/10' />
+                    <Skeleton className='h-5 w-16 rounded-full bg-white/10' />
+                    <Skeleton className='h-5 w-12 rounded-full bg-white/10' />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       </div>
     </motion.div>
-  )
-}
-
-function Bolt({ hit }: { hit: boolean }) {
-  return (
-    <motion.svg
-      width='280'
-      height='320'
-      viewBox='0 0 140 160'
-      className='absolute -top-10'
-      initial={{ y: -160, opacity: 0.95 }}
-      animate={hit ? { y: 10 } : { y: [-160, 10] }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      style={{
-        filter: 'drop-shadow(0 0 22px rgba(255,255,255,.95)) blur(0.4px)',
-      }}
-    >
-      <defs>
-        <linearGradient id='bolt' x1='0' y1='0' x2='0' y2='1'>
-          <stop offset='0%' stopColor='#fff' />
-          <stop offset='100%' stopColor='#e9e2ff' />
-        </linearGradient>
-        <filter id='glow'>
-          <feGaussianBlur stdDeviation='2' result='coloredBlur' />
-          <feMerge>
-            <feMergeNode in='coloredBlur' />
-            <feMergeNode in='SourceGraphic' />
-          </feMerge>
-        </filter>
-      </defs>
-      
-      <motion.ellipse
-        cx='70'
-        cy='80'
-        rx='62'
-        ry='62'
-        fill='rgba(255,255,255,.06)'
-        animate={hit ? { scale: [1, 1.2, 1] } : {}}
-        transform='translate(0,0)'
-      />
-      
-      <motion.path
-        d='M84 8 L42 88 H76 L50 152 L102 68 H68 Z'
-        fill='url(#bolt)'
-        filter='url(#glow)'
-      />
-    </motion.svg>
   )
 }

@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TimedSkeletonOverlay } from '@/components/loading'
 import { ScrollProgress } from '@/components/scroll-progress'
+import { ThemeProvider } from '@/components/theme-provider'
 import { getProjects } from '@/lib/projects'
 import type { Metadata } from 'next'
 import { NextIntlClientProvider, useMessages } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
 import { Inter } from 'next/font/google'
+
 import '../globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -35,19 +37,21 @@ export default function RootLayout({
 
   return (
     <html suppressHydrationWarning>
-      <body className={inter.className}>
-        <NextIntlClientProvider>
-          {/* <LightningLoader images={imagesToPreload} minDuration={1200} /> */}
-          {/* <CurtainLoader minDuration={900} /> */}
-          <TimedSkeletonOverlay
-            images={imagesToPreload}
-            minDuration={900}
-            maxDuration={2500}
-          />
-          <ScrollProgress />
-          {children}
-        </NextIntlClientProvider>
-      </body>
+      <ThemeProvider>
+        <body className={inter.className}>
+          <NextIntlClientProvider>
+            {/* <LightningLoader images={imagesToPreload} minDuration={1200} /> */}
+            {/* <CurtainLoader minDuration={900} /> */}
+            <TimedSkeletonOverlay
+              images={imagesToPreload}
+              minDuration={900}
+              maxDuration={2500}
+            />
+            <ScrollProgress />
+            {children}
+          </NextIntlClientProvider>
+        </body>
+      </ThemeProvider>
     </html>
   )
 }

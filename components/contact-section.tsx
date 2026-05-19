@@ -14,17 +14,25 @@ export function ContactSection() {
       <div className='mx-auto max-w-4xl px-4 text-center'>
         <h2 className='text-2xl md:text-3xl font-semibold'>{t('title')}</h2>
         <p className='text-white/80 mt-3'>{t('subtitle')}</p>
-        <div className='mt-6 flex justify-center gap-3'>
-          <Button asChild className='bg-brand-500 hover:bg-brand-600'>
+
+        <div className='mt-6 flex flex-wrap justify-center gap-3'>
+          <Button
+            asChild
+            className='border border-white/10'
+            style={{
+              background: 'linear-gradient(90deg, var(--brand-1), var(--brand-2))',
+            }}
+          >
             <a href={email}>
               <Mail className='mr-2 h-4 w-4' />
               {t('email')}
             </a>
           </Button>
+          
           <Button
             asChild
             variant='secondary'
-            className='bg-white/10 border-white/10 text-zinc-200 hover:text-zinc-800'
+            className='bg-white/10 border-white/10 text-zinc-200 hover:bg-white/15 hover:text-white'
           >
             <a href={whatsapp} target='_blank' rel='noreferrer'>
               <MessageCircle className='mr-2 h-4 w-4' />

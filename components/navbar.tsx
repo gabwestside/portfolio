@@ -14,6 +14,7 @@ import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useState } from 'react'
 import { LanguageSwitcher } from './language-switcher'
+import { ThemeSwitcher } from './theme-switcher'
 
 export function Navbar() {
   const t = useTranslations('Navbar')
@@ -43,21 +44,32 @@ export function Navbar() {
             </a>
           ))}
         </div>
-
+        
+        <div className='hidden md:flex items-center gap-2'>
+          <LanguageSwitcher />
+          <ThemeSwitcher />
+        </div>
+        
         <div className='md:hidden'>
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button
                 size='icon'
                 variant='secondary'
-                className='bg-white/10 border-white/10 text-zinc-200 hover:text-zinc-800'
+                className='bg-white/10 border-white/10 text-zinc-200 hover:bg-white/15 hover:text-white'
               >
                 <Menu />
               </Button>
             </SheetTrigger>
+
             <SheetContent
               side='right'
-              className='bg-gradient-to-b from-[#320a66] to-[#1d0730ee] border-white/10 text-white flex flex-col'
+              className='bg-neutral-950 border-white/10 text-white flex flex-col'
+              style={{
+                backgroundImage:
+                  'radial-gradient(700px 350px at 50% 10%, var(--aurora-1) 0%, transparent 60%),' +
+                  'radial-gradient(700px 420px at 50% 95%, var(--aurora-2) 0%, transparent 60%)',
+              }}
             >
               <SheetHeader className='flex flex-row items-center justify-between'>
                 <SheetTitle className='font-bold text-lg tracking-wide'>
@@ -85,6 +97,11 @@ export function Navbar() {
                   </a>
                 ))}
               </div>
+              
+              <div className='mt-8 flex items-center justify-center gap-2'>
+                <LanguageSwitcher />
+                <ThemeSwitcher />
+              </div>
 
               <div className='mt-auto pb-6 flex gap-4 justify-center'>
                 <a
@@ -107,7 +124,6 @@ export function Navbar() {
             </SheetContent>
           </Sheet>
         </div>
-        <LanguageSwitcher />
       </nav>
     </header>
   )

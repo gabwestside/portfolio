@@ -1,6 +1,6 @@
 'use client'
-import { useEffect, useState } from 'react'
 import { motion, useAnimation } from 'framer-motion'
+import { useEffect, useId, useMemo, useState } from 'react'
 
 export type LightningLoaderProps = {
   images?: string[]
@@ -26,11 +26,11 @@ export function LightningLoader({
           img.onload = () => resolve()
           img.onerror = () => resolve()
           img.src = src
-        })
+        }),
     )
 
     const minTime = new Promise<void>((r) => setTimeout(() => r(), minDuration))
-    const t = setTimeout(() => setHit(true), 600)
+    const t = setTimeout(() => setHit(true), 450)
 
     Promise.all([Promise.all(preload), minTime]).then(async () => {
       await fade.start({ opacity: 0, transition: { duration: 0.5 } })
@@ -52,7 +52,8 @@ export function LightningLoader({
       className='fixed inset-0 z-[9999] grid place-items-center bg-neutral-950'
       style={{
         backgroundImage:
-          'radial-gradient(800px 400px at 50% 10%, rgba(156,39,255,0.25) 0%, transparent 60%),radial-gradient(700px 380px at 50% 90%, rgba(116,23,234,0.25) 0%, transparent 60%)',
+          `radial-gradient(800px 400px at 50% 10%, var(--aurora-1) 0%, transparent 60%),` +
+          `radial-gradient(700px 380px at 50% 90%, var(--aurora-2) 0%, transparent 60%)`,
         backdropFilter: 'blur(0.5px)',
       }}
     >
@@ -72,14 +73,15 @@ export function LightningLoader({
         >
           GABWESTSIDE
         </motion.h1>
-        
+
         <Bolt hit={hit} />
 
+        {/* flash menos agressivo */}
         <motion.div
           initial={{ opacity: 0 }}
-          animate={hit ? { opacity: [0, 0.9, 0] } : { opacity: 0 }}
-          transition={{ duration: 0.35, ease: 'easeOut' }}
-          className='pointer-events-none absolute inset-0 bg-white/70'
+          animate={hit ? { opacity: [0, 0.55, 0] } : { opacity: 0 }}
+          transition={{ duration: 0.28, ease: 'easeOut' }}
+          className='pointer-events-none absolute inset-0 bg-white'
           style={{ mixBlendMode: 'screen' }}
         />
       </div>
@@ -88,47 +90,97 @@ export function LightningLoader({
 }
 
 function Bolt({ hit }: { hit: boolean }) {
+  const uid = useId()
+
+  // raio “jagged” determinístico por render (melhor que shape chapado)
+  const points = useMemo(() => {
+    const topX = 70
+    const topY = 8
+    const bottomY = 170
+
+    const segs = 8
+    const step = (bottomY - topY) / segs
+
+    let x = topX
+    const pts: Array<[number, number]> = [[x, topY]]
+
+    for (let i = 1; i <= segs; i++) {
+      const dir = i % 2 === 0 ? -1 : 1
+      const jitter = 10 + Math.random() * 10
+      x = Math.max(28, Math.min(112, x + dir * jitter))
+      pts.push([x, topY + step * i])
+    }
+
+    return pts.map(([px, py]) => `${px},${py}`).join(' ')
+  }, [])
+
   return (
     <motion.svg
-      width='280'
-      height='320'
-      viewBox='0 0 140 160'
-      className='absolute -top-10'
-      initial={{ y: -160, opacity: 0.95 }}
-      animate={hit ? { y: 10 } : { y: [-160, 10] }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      style={{
-        filter: 'drop-shadow(0 0 22px rgba(255,255,255,.95)) blur(0.4px)',
-      }}
+      width='320'
+      height='380'
+      viewBox='0 0 140 180'
+      className='absolute -top-20 pointer-events-none'
+      initial={{ y: -220, opacity: 0.9 }}
+      animate={hit ? { y: 0, opacity: 1 } : { y: -220, opacity: 0.9 }}
+      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+      style={{ filter: 'drop-shadow(0 0 26px rgba(255,255,255,.85))' }}
     >
       <defs>
-        <linearGradient id='bolt' x1='0' y1='0' x2='0' y2='1'>
+        <linearGradient id={`bolt-${uid}`} x1='0' y1='0' x2='0' y2='1'>
           <stop offset='0%' stopColor='#fff' />
-          <stop offset='100%' stopColor='#e9e2ff' />
+          <stop offset='65%' stopColor='#f1ecff' />
+          <stop offset='100%' stopColor='#d9ccff' />
         </linearGradient>
-        <filter id='glow'>
-          <feGaussianBlur stdDeviation='2' result='coloredBlur' />
+
+        <filter id={`glow-${uid}`} x='-50%' y='-50%' width='200%' height='200%'>
+          <feGaussianBlur stdDeviation='3.5' result='blur' />
+          <feColorMatrix
+            in='blur'
+            type='matrix'
+            values='
+              1 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 18 -7'
+            result='glow'
+          />
           <feMerge>
-            <feMergeNode in='coloredBlur' />
+            <feMergeNode in='glow' />
             <feMergeNode in='SourceGraphic' />
           </feMerge>
         </filter>
       </defs>
-      
+
       <motion.ellipse
         cx='70'
-        cy='80'
+        cy='120'
         rx='62'
         ry='62'
         fill='rgba(255,255,255,.06)'
-        animate={hit ? { scale: [1, 1.2, 1] } : {}}
-        transform='translate(0,0)'
+        animate={
+          hit ? { scale: [1, 1.25, 1], opacity: [0.05, 0.14, 0.06] } : {}
+        }
+        transition={{ duration: 0.35, ease: 'easeOut' }}
       />
-      
-      <motion.path
-        d='M84 8 L42 88 H76 L50 152 L102 68 H68 Z'
-        fill='url(#bolt)'
-        filter='url(#glow)'
+
+      <polyline
+        points={points}
+        fill='none'
+        stroke='#ffffff'
+        strokeOpacity='0.35'
+        strokeWidth='10'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        filter={`url(#glow-${uid})`}
+      />
+
+      <polyline
+        points={points}
+        fill='none'
+        stroke={`url(#bolt-${uid})`}
+        strokeWidth='4.5'
+        strokeLinecap='round'
+        strokeLinejoin='round'
       />
     </motion.svg>
   )

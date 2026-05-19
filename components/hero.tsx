@@ -20,12 +20,19 @@ export function Hero() {
 
   return (
     <section className='relative overflow-hidden pt-20 pb-24'>
+      {/* Halo orgânico usando o tema atual */}
       <motion.div
         style={{ y: y2 }}
         aria-hidden
-        className='pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[90vw] max-w-5xl h-72 rounded-full blur-3xl'
+        className='pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[90vw] max-w-5xl h-72 rounded-full blur-3xl opacity-70'
       >
-        <div className='w-full h-full bg-gradient-to-b from-brand-500/50 to-fuchsia-500/30 rounded-full' />
+        <div
+          className='w-full h-full rounded-full'
+          style={{
+            background:
+              'linear-gradient(180deg, color-mix(in oklab, var(--brand-1) 55%, transparent), color-mix(in oklab, var(--brand-2) 35%, transparent))',
+          }}
+        />
       </motion.div>
 
       <div className='mx-auto max-w-6xl px-4 grid lg:grid-cols-[1.1fr,0.9fr] gap-8 items-center'>
@@ -36,25 +43,36 @@ export function Hero() {
               {t('role')}
             </span>
           </h1>
+
           <p className='text-white/80 max-w-2xl'>{t('description')}</p>
+
           <div className='flex flex-wrap gap-3'>
-            <Button asChild className='bg-brand-500 hover:bg-brand-600 '>
+            <Button
+              asChild
+              className='border border-white/10'
+              style={{
+                background:
+                  'linear-gradient(90deg, var(--brand-1), var(--brand-2))',
+              }}
+            >
               <a href='#projects'>{t('viewProjects')}</a>
             </Button>
+            
             <Button
               asChild
               variant='secondary'
-              className='bg-white/10 border-white/10 text-zinc-200 hover:text-zinc-800'
+              className='bg-white/10 border-white/10 text-zinc-200 hover:bg-white/15 hover:text-white'
             >
               <a href={github} target='_blank' rel='noreferrer'>
                 <Github className='mr-2 h-4 w-4' />
                 {t('github')}
               </a>
             </Button>
+
             <Button
               asChild
               variant='secondary'
-              className='bg-white/10 border-white/10 text-zinc-200 hover:text-zinc-800'
+              className='bg-white/10 border-white/10 text-zinc-200 hover:bg-white/15 hover:text-white'
             >
               <a href={linkedin} target='_blank' rel='noreferrer'>
                 <Linkedin className='mr-2 h-4 w-4' />
@@ -66,11 +84,20 @@ export function Hero() {
 
         <motion.div style={{ y: y2, scale }} className='justify-self-center'>
           <div className='relative h-64 w-64 md:h-72 md:w-72'>
+            <div
+              className='absolute inset-0 -z-10 rounded-full blur-2xl opacity-40'
+              style={{
+                background:
+                  'radial-gradient(circle, var(--brand-2) 0%, transparent 65%)',
+              }}
+            />
+
             <Image
               src='/profile-pic.png'
               alt={t('profileAlt')}
               fill
-              className='rounded-full object-cover ring-4 ring-white/80 shadow-soft'
+              className='rounded-full object-cover ring-4 ring-white/80 drop-shadow-[0_18px_40px_rgba(0,0,0,.35)]'
+              priority
             />
           </div>
         </motion.div>

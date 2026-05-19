@@ -6,8 +6,8 @@ import { useEffect, useMemo, useState } from 'react'
 
 type Props = {
   images?: string[]
-  minDuration?: number // exibe no mínimo X ms
-  maxDuration?: number // força sumir mesmo se algo falhar
+  minDuration?: number
+  maxDuration?: number
 }
 
 export function TimedSkeletonOverlay({
@@ -39,7 +39,6 @@ export function TimedSkeletonOverlay({
     const minTime = new Promise<void>((r) => setTimeout(r, minDuration))
     const maxTime = new Promise<void>((r) => setTimeout(r, maxDuration))
 
-    // some quando: (imagens + tempo mínimo) OU estourar maxDuration
     Promise.race([
       Promise.all([preloadPromise, minTime]).then(() => undefined),
       maxTime,
@@ -62,12 +61,12 @@ export function TimedSkeletonOverlay({
       className='fixed inset-0 z-[9999] bg-neutral-950'
       style={{
         backgroundImage:
-          'radial-gradient(900px 450px at 50% 15%, rgba(156,39,255,0.26) 0%, transparent 60%),' +
-          'radial-gradient(900px 520px at 50% 95%, rgba(116,23,234,0.24) 0%, transparent 60%)',
+          `radial-gradient(900px 450px at 50% 15%, var(--aurora-1) 0%, transparent 60%),` +
+          `radial-gradient(900px 520px at 50% 95%, var(--aurora-2) 0%, transparent 60%),` +
+          `linear-gradient(180deg, #07070b 0%, #090913 55%, #07070b 100%)`,
       }}
     >
       <div className='h-full w-full'>
-        {/* Skeleton “igual a página” */}
         <div className='sticky top-0 z-40 border-b border-white/10 bg-black/20 backdrop-blur'>
           <div className='mx-auto max-w-6xl px-4 h-14 flex items-center justify-between'>
             <Skeleton className='h-5 w-28 bg-white/10' />
@@ -126,6 +125,13 @@ export function TimedSkeletonOverlay({
             </div>
           </div>
         </section>
+        
+        <div
+          className='pointer-events-none absolute bottom-0 left-0 right-0 h-[2px] opacity-80'
+          style={{
+            background: 'linear-gradient(90deg, var(--brand-1), var(--brand-2))',
+          }}
+        />
       </div>
     </motion.div>
   )

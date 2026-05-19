@@ -49,6 +49,7 @@ export function ProjectCard(p: Project) {
                 </span>
               </CardTitle>
             </CardHeader>
+
             <CardContent>
               <div className='relative aspect-[16/10] overflow-hidden rounded-xl border border-white/10'>
                 <Image
@@ -62,9 +63,11 @@ export function ProjectCard(p: Project) {
                 {/* overlay sutil ao hover */}
                 <div className='pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition' />
               </div>
+
               <p className='text-sm text-white/70 mt-3 line-clamp-3'>
                 {p.description}
               </p>
+
               <div className='mt-3 flex flex-wrap gap-2'>
                 {p.tech.map((t) => (
                   <Badge
@@ -82,6 +85,14 @@ export function ProjectCard(p: Project) {
       </DialogTrigger>
 
       <DialogContent className='max-w-3xl bg-neutral-950 border-white/10 p-0 overflow-hidden'>
+        <div
+          className='h-[3px] w-full'
+          style={{
+            background:
+              'linear-gradient(90deg, var(--brand-1), var(--brand-2))',
+          }}
+        />
+
         <DialogHeader className='px-5 pt-5'>
           <DialogTitle className='text-xl text-zinc-100'>{p.title}</DialogTitle>
           <DialogDescription className='text-sm text-zinc-400'>
@@ -98,7 +109,6 @@ export function ProjectCard(p: Project) {
             sizes='(max-width: 768px) 100vw, 60vw'
             priority
           />
-
           <div className='absolute inset-0 ring-1 ring-white/10 rounded-none' />
         </div>
 
@@ -121,18 +131,26 @@ export function ProjectCard(p: Project) {
 
           <div className='mt-6 flex flex-wrap gap-3'>
             {p.demo && (
-              <Button asChild className='bg-brand-500 hover:bg-brand-600'>
+              <Button
+                asChild
+                className='border border-white/10'
+                style={{
+                  background:
+                    'linear-gradient(90deg, var(--brand-1), var(--brand-2))',
+                }}
+              >
                 <a href={p.demo} target='_blank' rel='noreferrer'>
                   <ExternalLink className='mr-2 h-4 w-4' />
                   {p.demoLabel}
                 </a>
               </Button>
             )}
+
             {p.repo && (
               <Button
                 asChild
                 variant='secondary'
-                className='bg-white/10 border-white/10 text-sm text-white/80 hover:text-zinc-800'
+                className='bg-white/10 border-white/10 text-sm text-white/80 hover:bg-white/15 hover:text-white'
               >
                 <a href={p.repo} target='_blank' rel='noreferrer'>
                   <Github className='mr-2 h-4 w-4' />

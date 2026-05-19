@@ -31,12 +31,12 @@ export function CurtainLoader({ minDuration = 800, onDone }: Props) {
       className='fixed inset-0 z-[9999] grid place-items-center bg-neutral-950'
       style={{
         backgroundImage:
-          'radial-gradient(900px 450px at 50% 15%, rgba(156,39,255,0.30) 0%, transparent 60%),' +
-          'radial-gradient(900px 500px at 50% 95%, rgba(116,23,234,0.28) 0%, transparent 60%),' +
-          'linear-gradient(180deg, #07070b 0%, #090913 55%, #07070b 100%)',
+          `radial-gradient(900px 450px at 50% 15%, var(--aurora-1) 0%, transparent 60%),` +
+          `radial-gradient(900px 500px at 50% 95%, var(--aurora-2) 0%, transparent 60%),` +
+          `linear-gradient(180deg, #07070b 0%, #090913 55%, #07070b 100%)`,
       }}
     >
-      {/* blur glow atrás */}
+      
       <div className='pointer-events-none absolute inset-0 backdrop-blur-[1.5px]' />
 
       <div className='relative w-[min(90vw,560px)] text-center'>
@@ -58,23 +58,25 @@ export function CurtainLoader({ minDuration = 800, onDone }: Props) {
         >
           Carregando…
         </motion.p>
-
-        {/* progress bar “fake” bonita */}
+        
         <div className='mt-6 h-2 w-full rounded-full bg-white/10 overflow-hidden border border-white/10'>
           <motion.div
-            className='h-full w-1/2 bg-gradient-to-r from-brand-500 to-fuchsia-500'
+            className='h-full w-1/2'
+            style={{
+              background:
+                'linear-gradient(90deg, var(--brand-1), var(--brand-2))',
+            }}
             initial={{ x: '-100%' }}
             animate={{ x: '200%' }}
             transition={{ duration: 0.9, repeat: Infinity, ease: 'easeInOut' }}
           />
         </div>
-
-        {/* curtain reveal (opcional visual) */}
+        
         <motion.div
           className='pointer-events-none absolute -inset-10 rounded-[32px]'
           style={{
             background:
-              'linear-gradient(90deg, rgba(156,39,255,0.18), rgba(116,23,234,0.10))',
+              'linear-gradient(90deg, color-mix(in oklab, var(--brand-2) 20%, transparent), color-mix(in oklab, var(--brand-1) 12%, transparent))',
             filter: 'blur(18px)',
           }}
           animate={{ opacity: [0.35, 0.55, 0.35] }}

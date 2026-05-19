@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Palette } from 'lucide-react'
 import { useTheme } from 'next-themes'
+import { useRouter } from 'next/navigation'
 
 const THEMES = [
   { id: 'nebula', label: 'Nebula (Purple)' },
@@ -21,9 +22,18 @@ const THEMES = [
 type ThemeId = (typeof THEMES)[number]['id']
 
 export const ThemeSwitcher = () => {
+  const router = useRouter()
   const { theme, setTheme } = useTheme()
 
   const current = (theme as ThemeId) ?? 'nebula'
+
+  const applyTheme = (nextTheme: ThemeId) => {
+    if (nextTheme === current) return
+
+    setTheme(nextTheme)
+    
+    router.refresh()
+  }
 
   return (
     <DropdownMenu>
@@ -38,7 +48,7 @@ export const ThemeSwitcher = () => {
         {THEMES.map((t) => (
           <DropdownMenuItem
             key={t.id}
-            onClick={() => setTheme(t.id)}
+            onClick={() => applyTheme(t.id)}
             className={t.id === current ? 'opacity-70' : undefined}
           >
             {t.label}

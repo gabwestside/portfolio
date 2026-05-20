@@ -44,7 +44,7 @@ export const ThemeSwitcher = () => {
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align='end' className='bg-transparent text-white'>
+      <DropdownMenuContent align='end' className='backdrop-blur supports-[backdrop-filter]:bg-black/30 bg-black/20 text-white'>
         {THEMES.map((t) => (
           <DropdownMenuItem
             key={t.id}

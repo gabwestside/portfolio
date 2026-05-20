@@ -25,7 +25,7 @@ export const LanguageSwitcher = () => {
           <span className='sr-only'>Toggle Language</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='end' className='bg-transparent text-white'>
+      <DropdownMenuContent align='end' className='backdrop-blur supports-[backdrop-filter]:bg-black/30 bg-black/20 text-white'>
         <DropdownMenuItem
           onClick={() => router.push(pathname, { locale: 'en' })}
         >

@@ -113,7 +113,7 @@ export function Navbar() {
                   <Github />
                 </a>
                 <a
-                  href='https://www.linkedin.com/in/gabriel-moura-706541200/'
+                  href='https://www.linkedin.com/in/gabwestside/'
                   target='_blank'
                   rel='noreferrer'
                   className='hover:text-neutral-200 transition-colors'
